@@ -7,12 +7,14 @@
 #--5)--FEATURE SELECTION
 
 
+import os
+
+import matplotlib.pyplot as plt
+import numpy as np
 #---------------------------------------1)-READING THE DATA-------------------------------------------------
 import pandas as pd
-import numpy as np
 import seaborn as sns
-import matplotlib.pyplot as plt
-import os
+
 os.getcwd()
 
 
@@ -172,8 +174,9 @@ df1_final_OHC=pd.get_dummies(df1_final,drop_first=True)
 X=df1_final_OHC.drop("Price",axis=1)
 y=df1_final_OHC["Price"]
 
-from sklearn.linear_model import  LassoCV, Lasso
-from sklearn.feature_selection import SelectFromModel      
+from sklearn.feature_selection import SelectFromModel
+from sklearn.linear_model import Lasso, LassoCV
+
 reg = LassoCV()
 reg.fit(X, y)
 print("Best alpha using built-in LassoCV: %f" % reg.alpha_)
@@ -251,6 +254,7 @@ Y=best_model1["Price"]
 
 
 from sklearn.preprocessing import StandardScaler
+
 scaler=StandardScaler()
 
 best_model=scaler.fit_transform(X)
@@ -286,7 +290,7 @@ adj_r2(X_train,Y_train)
 
 adj_r2(X_test,Y_test)
 #..........................................................................................................
-from sklearn.metrics import mean_squared_error,mean_absolute_error
+from sklearn.metrics import mean_absolute_error, mean_squared_error
 
 Y_pred=lin_model.predict(X_test)
 
@@ -301,7 +305,8 @@ sns.distplot(Y_test-Y_pred)
 
 #-----------------------------CHECKING OVERFITTING OR REGULARIZATION--------------------------------------
 
-from sklearn.linear_model  import Ridge,Lasso,RidgeCV, LassoCV, ElasticNet, ElasticNetCV
+from sklearn.linear_model import (ElasticNet, ElasticNetCV, Lasso, LassoCV,
+                                  Ridge, RidgeCV)
 
 #------------------------------------------1) BY RIDGE REGRESSION--------------------------------------------------------------
 
@@ -372,7 +377,7 @@ elas_model.score(X_test,Y_test)
 
 #------------------------------------------1)LIN-MODEL---------------------------------------------------
 
-from sklearn.metrics import mean_squared_error,mean_absolute_error
+from sklearn.metrics import mean_absolute_error, mean_squared_error
 
 Y_pred=lin_model.predict(X_test)
 
